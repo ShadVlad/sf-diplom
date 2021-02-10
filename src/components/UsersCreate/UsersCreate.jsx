@@ -22,6 +22,7 @@ export class UsersCreate extends Component {
 
   handleUserCreate = (event) => {
     const user = this.state;
+    console.log(user);
     fetch("http://84.201.129.203:8888/api/auth/sign_in", {
       //fetch("http://jsonplaceholder.typicode.com/users", {
       method: "POST",
