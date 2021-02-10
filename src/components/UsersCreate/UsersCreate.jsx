@@ -11,9 +11,13 @@ export class UsersCreate extends Component {
     approved: false,
   };
 
-  handleNameChange = (event) => {
-    const name = event.target.value;
-    this.setState({ name });
+  handleInputChange = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    this.setState({
+      [name]: value,
+    });
   };
 
   handleUserCreate = (event) => {
@@ -34,7 +38,7 @@ export class UsersCreate extends Component {
         "Content-Type": "application/json",
       },
     }).then((response) => {
-      console.log(response.json);
+      console.log(response);
       if (!response.ok) {
         alert("Sign-up failed with HTTP code " + response.status);
       } else {
@@ -52,7 +56,7 @@ export class UsersCreate extends Component {
           type="text"
           name="firstName"
           placeholder="firstName"
-          onChange={this.handleNameChange}
+          onChange={this.handleInputChange}
           value={user.firstName}
         />
         <br />
@@ -60,7 +64,7 @@ export class UsersCreate extends Component {
           type="text"
           name="lastName"
           placeholder="lastName"
-          onChange={this.handleNameChange}
+          onChange={this.handleInputChange}
           value={user.lastName}
         />
         <br />
@@ -68,27 +72,17 @@ export class UsersCreate extends Component {
           type="text"
           name="email"
           placeholder="mail@mail.com"
-          onChange={this.handleNameChange}
+          onChange={this.handleInputChange}
           value={user.email}
         />
-
         <br />
         <input
           type="password"
           name="password"
           placeholder=""
-          onChange={this.handleNameChange}
-          value={user.lastName}
+          onChange={this.handleInputChange}
+          value={user.password}
         />
-        <br />
-        <input
-          type="text"
-          name="clientId"
-          placeholder="mail@mail.com"
-          onChange={this.handleNameChange}
-          value={user.clientId}
-        />
-
         <br />
         <input
           type="button"
@@ -99,5 +93,6 @@ export class UsersCreate extends Component {
       </div>
     );
     //<div>Hello from UsersList</div>; User create
+    //<input type="text" name="clientId" placeholder="" onChange={this.handleInputChange} value={user.clientId}  />
   }
 }
