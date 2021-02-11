@@ -23,7 +23,7 @@ export class UsersCreate extends Component {
   handleUserCreate = (event) => {
     const user = this.state;
     console.log(user);
-    fetch("http://84.201.129.203:8888/api/auth/sign_in", {
+    fetch("http://84.201.129.203:8888/api/auth/sign_up", {
       //fetch("http://jsonplaceholder.typicode.com/users", {
       method: "POST",
       body: JSON.stringify({
@@ -31,7 +31,7 @@ export class UsersCreate extends Component {
         firstName: user.firstName,
         lastName: user.lastName,
         password: user.password,
-        repassword: user.password2,
+        repassword: user.repassword,
         clientId: user.clientId,
         approved: false,
       }),
@@ -85,6 +85,14 @@ export class UsersCreate extends Component {
           value={user.password}
         />
         <br />
+        <input
+          type="password"
+          name="repassword"
+          placeholder=""
+          onChange={this.handleInputChange}
+          value={user.repassword}
+        />
+        <br />{" "}
         <input
           type="button"
           onClick={this.handleUserCreate}
