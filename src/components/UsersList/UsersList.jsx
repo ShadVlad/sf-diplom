@@ -9,7 +9,10 @@ export class UsersList extends Component {
   componentDidMount() {
     fetch("http://84.201.129.203:8888/api/cases")
       //fetch("http://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        response.json();
+      })
       .then((cases) => {
         this.setState({ cases });
       });
@@ -20,6 +23,7 @@ export class UsersList extends Component {
     return (
       <div class="UsersList">
         <Link to="/create">Создать пользователя</Link>
+        <Link to="/auth">Войти</Link>
       </div>
       //   <div class="UsersList">
       //     <Link to="/create">Создать пользователя</Link>
