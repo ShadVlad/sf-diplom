@@ -19,7 +19,6 @@ export class UserAuthorize extends Component {
       });
     } //check auth
   }
-
   chkEnter = (e) => {
     const ENTER = 13; //keycode
 
@@ -40,12 +39,10 @@ export class UserAuthorize extends Component {
         "Content-type": "application/json",
       },
     })
-      .then((response) => {
-        console.log(response.json());
-        response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        console.log(localStorage.getItem("token"));
         if (!data.token) {
           alert("Invalid account!");
           return;
@@ -62,7 +59,9 @@ export class UserAuthorize extends Component {
 
   handleInputChange = (event) => {
     const value = event.target.value;
+    console.log("value: ", value);
     const name = event.target.name;
+    console.log("name: ", name);
 
     this.setState({
       [name]: value,
@@ -86,34 +85,29 @@ export class UserAuthorize extends Component {
   render() {
     const state = this.state;
 
-    if (state.redirect === false) {
-      return (
-        <div className="authBody">
-          <h2>Вход</h2>
+    //if (state.redirect === false) {
+    return (
+      <div class="form-signin text-center">
+        <form>
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <label for="inputEmail" class="visually-hidden">
+            Email address
+          </label>
           <input
+            class="form-control"
             type="email"
             name="email"
             placeholder="e-mail"
             onKeyDown={this.chkEnter}
             onChange={this.handleInputChange}
             value={state.email}
-          />{" "}
+          ></input>{" "}
           <br />
-          <div>
-            {" "}
-            <label htmlFor="passwordToggle" id="checkbox">
-              Password visibility:
-            </label>{" "}
-            <input
-              type="checkbox"
-              id="checkbox"
-              name="passwordToggle"
-              onChange={this.toggleCheckbox}
-              value={true}
-            />{" "}
-          </div>{" "}
-          <br /> <br />
+          <label for="inputPassword" class="visually-hidden">
+            Password
+          </label>
           <input
+            class="form-control"
             type="password"
             id="password"
             name="password"
@@ -121,26 +115,22 @@ export class UserAuthorize extends Component {
             onKeyDown={this.chkEnter}
             onChange={this.handleInputChange}
             value={state.password}
-          />{" "}
-          <br />
-          <input
+          ></input>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"></input>Remember me
+            </label>
+          </div>
+          <button
+            class="w-100 btn btn-lg btn-primary"
             type="submit"
-            id="auth"
-            value="Войти"
             onClick={this.submit}
             disabled={!state.email.length || !state.password.length}
-          />
-          <span>
-            Или <Link to="/create">авторизоваться</Link>
-          </span>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Redirect to="/collaborators" />
-        </div>
-      ); /*this renders a redirect (thus sending you forward after you sign in) after you've been verified*/
-    }
+          >
+            Sign in
+          </button>
+        </form>
+      </div>
+    );
   }
 }

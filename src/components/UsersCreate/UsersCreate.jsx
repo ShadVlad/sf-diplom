@@ -52,8 +52,10 @@ export class UsersCreate extends Component {
   render() {
     const user = this.state;
     return (
-      <div>
+      <div class="form-signin">
+        <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
         <input
+          class="form-control"
           type="text"
           name="firstName"
           placeholder="firstName"
@@ -62,6 +64,7 @@ export class UsersCreate extends Component {
         />
         <br />
         <input
+          class="form-control"
           type="text"
           name="lastName"
           placeholder="lastName"
@@ -70,6 +73,7 @@ export class UsersCreate extends Component {
         />
         <br />
         <input
+          class="form-control"
           type="text"
           name="email"
           placeholder="mail@mail.com"
@@ -78,6 +82,7 @@ export class UsersCreate extends Component {
         />
         <br />
         <input
+          class="form-control"
           type="password"
           name="password"
           placeholder=""
@@ -86,6 +91,7 @@ export class UsersCreate extends Component {
         />
         <br />
         <input
+          class="form-control"
           type="password"
           name="repassword"
           placeholder=""
@@ -94,6 +100,7 @@ export class UsersCreate extends Component {
         />
         <br />{" "}
         <input
+          class="w-100 btn btn-lg btn-primary"
           type="button"
           onClick={this.handleUserCreate}
           value="Создать"

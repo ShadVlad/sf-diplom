@@ -7,7 +7,21 @@ export class UsersList extends Component {
     cases: [],
   };
   componentDidMount() {
-    fetch("http://84.201.129.203:8888/api/cases")
+    console.log(localStorage.getItem("token"));
+    if (!localStorage.getItem("token")) {
+      this.setState((prevState) => {
+        this.state.authFlag = true;
+      });
+      this.render();
+      return;
+    } //redirect to main
+    fetch("http://84.201.129.203:8888/api/cases", {
+      headers: {
+        Authorization: "Bearer ".concat(
+          localStorage.getItem("token").toString()
+        ),
+      },
+    })
       //fetch("http://jsonplaceholder.typicode.com/users")
       .then((response) => {
         console.log(response);
@@ -23,6 +37,7 @@ export class UsersList extends Component {
     return (
       <div class="UsersList">
         <Link to="/create">Создать пользователя</Link>
+        <br />
         <Link to="/auth">Войти</Link>
       </div>
       //   <div class="UsersList">
