@@ -1,0 +1,42 @@
+.navbar-my {
+  background-color: rgb(72, 166, 190);
+  display: flex;
+  color: white;
+
+  list-style: none;
+  margin: auto;
+  margin-bottom: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+a.title {
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.navigation-item {
+  list-style: none;
+}
+
+a.links {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  list-style: none;
+}
+
+.brand {
+  color: #000;
+  text-decoration-style: ;
+}
+
+.navigation {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 0;
+}
+
+nav {
+  align-items: center;
+}

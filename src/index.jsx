@@ -6,12 +6,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { UsersList } from "./components/UsersList";
 import { UsersCreate } from "./components/UsersCreate";
 import { UserAuthorize } from "./components/UserAuthorize";
+import { MainPage } from "./components/MainPage";
 export class App extends Component {
   render() {
     return (
       <div>
         <Switch>
-          <Route path="/" component={UsersList} exact={true} />
+          <Route path="/" component={MainPage} exact={true} />
           <Route path="/create" component={UsersCreate} exact={true} />
           <Route path="/auth" component={UserAuthorize} exact={true} />
         </Switch>

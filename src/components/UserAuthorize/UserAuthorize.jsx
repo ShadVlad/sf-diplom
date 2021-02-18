@@ -48,6 +48,7 @@ export class UserAuthorize extends Component {
           return;
         }
         localStorage.setItem("token", data.token); //save the received token to local storage
+        console.log("data.token: ", data.token);
         this.setState((prevState) => {
           this.state.redirect = true;
         });
@@ -87,9 +88,10 @@ export class UserAuthorize extends Component {
 
     //if (state.redirect === false) {
     return (
-      <div class="form-signin text-center">
+      <div className="form-signin">
+        <Link to="/">Home</Link>
         <form>
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
           <label for="inputEmail" class="visually-hidden">
             Email address
           </label>
@@ -107,7 +109,7 @@ export class UserAuthorize extends Component {
             Password
           </label>
           <input
-            class="form-control"
+            className="form-control"
             type="password"
             id="password"
             name="password"
@@ -129,6 +131,9 @@ export class UserAuthorize extends Component {
           >
             Sign in
           </button>
+          <span>
+            Or <Link to="/create">sign up</Link>
+          </span>
         </form>
       </div>
     );
