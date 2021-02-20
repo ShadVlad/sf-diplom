@@ -92,7 +92,7 @@ export class MainPage extends Component {
   render() {
     const self = this;
     const state = this.state;
-    //state.authorized = true;
+    state.authorized = true;
 
     let auth = (state.authorized && (
       <button
@@ -110,6 +110,14 @@ export class MainPage extends Component {
       <li className="navigation-item">
         <Link to="/cases" className="links">
           Cases
+        </Link>
+      </li>
+    );
+
+    let officer = state.authorized && (
+      <li className="navigation-item">
+        <Link to="/officers" className="links">
+          Ответственные
         </Link>
       </li>
     );
@@ -136,7 +144,8 @@ export class MainPage extends Component {
                         Сообщения о краже
                       </Link>
                     </li>
-                    {cases}
+
+                    {officer}
                   </ul>
                 </nav>
               </div>
