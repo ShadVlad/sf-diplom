@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import { CasesList } from "./components/CasesList";
 import { Context } from "./components/Context";
 import { UsersCreate } from "./components/UsersCreate";
 import { UserAuthorize } from "./components/UserAuthorize";
@@ -14,6 +15,7 @@ export class App extends Component {
         <MainPage />
         <Switch>
           <Route path="/" component={Context} exact={true} />
+          <Route path="/cases" component={CasesList} exact={true} />
           <Route path="/create" component={UsersCreate} exact={true} />
           <Route path="/auth" component={UserAuthorize} exact={true} />
         </Switch>

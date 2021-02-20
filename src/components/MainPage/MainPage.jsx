@@ -140,7 +140,7 @@ export class MainPage extends Component {
                 <nav>
                   <ul className="navigation d-flex ">
                     <li className="navigation-item ">
-                      <Link to="/report" className="links">
+                      <Link to="/cases" className="links">
                         Сообщения о краже
                       </Link>
                     </li>

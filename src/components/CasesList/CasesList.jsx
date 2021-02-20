@@ -1,8 +1,8 @@
-import "./UsersList.css";
+import "./CasesList.css";
 import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
-export class UsersList extends Component {
+export class CasesList extends Component {
   state = {
     cases: [],
   };
@@ -35,10 +35,8 @@ export class UsersList extends Component {
     console.log(this.state);
     const { cases } = this.state;
     return (
-      <div class="UsersList">
-        <Link to="/create">Создать пользователя</Link>
-        <br />
-        <Link to="/auth">Войти</Link>
+      <div className="CasesList">
+        <h1>Здесь будет таблица</h1>
       </div>
       //   <div class="UsersList">
       //     <Link to="/create">Создать пользователя</Link>
