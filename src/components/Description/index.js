@@ -1,1 +1,0 @@
-export { FrontPageComponent } from "./Frontpage.jsx";
