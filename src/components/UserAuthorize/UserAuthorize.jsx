@@ -28,10 +28,13 @@ export class UserAuthorize extends Component {
 
   submit = () => {
     const state = this.state;
+    console.log("state.password: ", state.password);
+    console.log("state.email,: ", state.email);
     fetch(`http://84.201.129.203:8888/api/auth/sign_in`, {
       method: "POST",
       body: JSON.stringify({
         email: state.email,
+
         password: state.password,
       }),
       headers: {
@@ -39,7 +42,7 @@ export class UserAuthorize extends Component {
       },
     })
       .then((response) => {
-        console.log("response: ", response.json());
+        response.json();
       })
       .then((data) => {
         console.log(data);
