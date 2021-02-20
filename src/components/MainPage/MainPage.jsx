@@ -104,7 +104,7 @@ export class MainPage extends Component {
         Sign out
       </button>
     )) ||
-      (state.shouldRedirect && <Redirect to="/auth" />) || (
+      (state.shouldRedirect && <Redirect to="/" />) || (
         <Link to="/auth">Log in</Link>
       );
     //this looks complicated; it's a pseudo case-switch
