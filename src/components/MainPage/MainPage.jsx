@@ -92,7 +92,7 @@ export class MainPage extends Component {
   render() {
     const self = this;
     const state = this.state;
-    state.authorized = true;
+    //state.authorized = true;
 
     let auth = (state.authorized && (
       <button
