@@ -33,7 +33,7 @@ export class UsersCreate extends Component {
         password: user.password,
         repassword: user.repassword,
         clientId: user.clientId,
-        approved: false,
+        approved: true,
       }),
       headers: {
         "Content-Type": "application/json",

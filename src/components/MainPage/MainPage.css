@@ -40,3 +40,7 @@ a.links {
 nav {
   align-items: center;
 }
+
+.hide {
+  display: none;
+}

@@ -30,6 +30,65 @@ export class MainPage extends Component {
     console.log("this.state.authorized: ", this.state.authorized);
     this.forceUpdate();
   }
+
+  static getDerivedStateFromProps(props, state) {
+    //called whenever we navigate to a new URL location, pre-render
+    let loggedIn = state.authorized;
+    let throwToAuth = true;
+    console.info(`%c//////`, "color: orange");
+    console.info(
+      `%cNavbar detected navigation towards ${props.currentPage}`,
+      "color: orange"
+    );
+    if (localStorage.getItem("token") && true == !state.authorized) {
+      //this is called whenever we log in or log out (auth status changes)
+      //in that case, we need to update status
+      loggedIn = (localStorage.getItem("token") && true) || false;
+      console.info(
+        `%cDetected transition of login status, accepting token: ${
+          localStorage.getItem("token") || "clearing"
+        }`,
+        "color: gold"
+      );
+      //this records the token as a boolean into auth state
+    }
+
+    console.info(
+      `%cNOW LOGGED IN (pre-redirect check): ${loggedIn}`,
+      "color: orange"
+    );
+    if (!loggedIn) {
+      //if unauthorized, check current page to see if you should be thrown out
+      //to prevent the redirect, add a case here
+      //by default, any page not listed here will throw you to /auth if accessed without a token
+
+      console.info(
+        `%cTesting whether page ${props.currentPage} should throw to auth`,
+        "color: orange"
+      );
+
+      switch (props.currentPage) {
+        case "/":
+        case "/report":
+        case "/create":
+        case "/auth": //this one's particularly important, obviously
+          throwToAuth = false;
+          console.info(`%cIt shouldn't`, "color: green");
+          break;
+        default:
+          throwToAuth = true;
+          console.info(`%cIt should`, "color: gold");
+          break;
+      }
+    }
+    console.info(`%c//////`, "color: orange");
+
+    return {
+      authorized: loggedIn,
+      init: true,
+      shouldRedirect: throwToAuth,
+    };
+  }
   render() {
     const self = this;
     const state = this.state;
@@ -37,7 +96,7 @@ export class MainPage extends Component {
     let auth = (state.authorized && (
       <button
         type="button"
-        class="btn btn-primary"
+        className="btn btn-primary"
         onClick={function () {
           return self.signOut(this);
         }}
@@ -45,7 +104,7 @@ export class MainPage extends Component {
         Sign out
       </button>
     )) ||
-      (state.shouldRedirect && <Redirect to="/" />) || (
+      (state.shouldRedirect && <Redirect to="/auth" />) || (
         <Link to="/auth">Log in</Link>
       );
     //this looks complicated; it's a pseudo case-switch
@@ -55,49 +114,52 @@ export class MainPage extends Component {
 
     return (
       <div>
-        <div class="navbar-my">
-          <header class="container container-nav header px-4 px-md-0">
-            <div class="row row-logo justify-content-between align-items-center">
-              <div class="col-lg-2 col-6 brand">
+        <div className="navbar-my">
+          <header className="container container-nav header px-4 px-md-0">
+            <div className="row row-logo justify-content-between align-items-center">
+              <div className="col-lg-2 col-6 brand">
                 <Link to="/" className="title">
                   BikeSecure
                 </Link>{" "}
               </div>
-              <div class="col-lg-6 d-none d-lg-block">
+              <div className="col-lg-6 d-none d-lg-block">
                 <nav>
-                  <ul class="navigation d-flex justify-content-between">
-                    <li class="navigation-item">
-                      <Link
-                        to="/report"
-                        className={state.authorized ? "hide links" : "links"}
-                      >
+                  <ul className="navigation d-flex justify-content-between">
+                    <li className="navigation-item">
+                      <Link to="/report" className="links">
                         Report a case
                       </Link>
                     </li>
-                    <li class="navigation-item">
-                      <Link
-                        to="/cases"
-                        className={!state.authorized ? "hide" : "links"}
-                      >
+                    <li
+                      className={
+                        !state.authorized
+                          ? "hide navigation-item"
+                          : "navigation-item"
+                      }
+                    >
+                      <Link to="/cases" className="links">
                         Cases
                       </Link>
                     </li>
-                    <li class="navigation-item">
-                      <Link
-                        to="/collaborators"
-                        className={!state.authorized ? "hide" : "links"}
-                      >
+                    <li
+                      className={
+                        !state.authorized
+                          ? "hide navigation-item"
+                          : "navigation-item"
+                      }
+                    >
+                      <Link to="/collaborators" className="links">
                         Collaborators
                       </Link>
                     </li>
                   </ul>
                 </nav>
               </div>
-              <div class="col-3">{auth}</div>
+              <div className="col-3">{auth}</div>
             </div>
           </header>
         </div>
-        <div class="main-body navbar-light"></div>
+        <div className="main-body navbar-light"></div>
       </div>
     );
   }

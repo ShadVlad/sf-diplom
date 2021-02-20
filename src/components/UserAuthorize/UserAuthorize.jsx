@@ -86,28 +86,26 @@ export class UserAuthorize extends Component {
   render() {
     const state = this.state;
 
-    //if (state.redirect === false) {
-    return (
-      <div className="form-signin">
-        <Link to="/">Home</Link>
-        <form>
-          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-          <label for="inputEmail" class="visually-hidden">
-            Email address
-          </label>
+    if (state.redirect === false) {
+      return (
+        <div className="authBody form-signin">
+          <h2 className="h3 mb-3 fw-normal">Вход</h2>
           <input
-            class="form-control"
+            className="form-control"
             type="email"
             name="email"
             placeholder="e-mail"
             onKeyDown={this.chkEnter}
             onChange={this.handleInputChange}
             value={state.email}
-          ></input>{" "}
+          />{" "}
           <br />
-          <label for="inputPassword" class="visually-hidden">
-            Password
-          </label>
+          <div>
+            {" "}
+            <label htmlFor="inputPassword" class="visually-hidden">
+              Password
+            </label>
+          </div>{" "}
           <input
             className="form-control"
             type="password"
@@ -117,25 +115,31 @@ export class UserAuthorize extends Component {
             onKeyDown={this.chkEnter}
             onChange={this.handleInputChange}
             value={state.password}
-          ></input>
-          <div class="checkbox mb-3">
+          />{" "}
+          <div className="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me"></input>Remember me
+              <input type="checkbox" value="remember-me"></input>Запомнить меня
             </label>
           </div>
-          <button
-            class="w-100 btn btn-lg btn-primary"
+          <input
+            className="w-100 btn btn-lg btn-primary"
             type="submit"
+            id="auth"
+            value="Войти"
             onClick={this.submit}
             disabled={!state.email.length || !state.password.length}
-          >
-            Sign in
-          </button>
+          />
           <span>
-            Or <Link to="/create">sign up</Link>
+            Или <Link to="/createUser">зарегестрироваться</Link>
           </span>
-        </form>
-      </div>
-    );
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Redirect to="/" />
+        </div>
+      ); /*this renders a redirect (thus sending you forward after you sign in) after you've been verified*/
+    }
   }
 }
