@@ -39,6 +39,11 @@ a.links {
 
 nav {
   align-items: center;
+
+}
+
+ul.navigation {
+  align-items: center;
 }
 
 .hide {

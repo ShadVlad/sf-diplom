@@ -103,10 +103,15 @@ export class MainPage extends Component {
       >
         Sign out
       </button>
-    )) ||
-      (state.shouldRedirect && <Redirect to="/" />) || (
-        <Link to="/auth">Log in</Link>
-      );
+    )) || <Link to="/auth">Log in</Link>;
+
+    let cases = state.authorized && (
+      <li className="navigation-item">
+        <Link to="/cases" className="links">
+          Cases
+        </Link>
+      </li>
+    );
     //this looks complicated; it's a pseudo case-switch
     //if you're logged in, it's a sign out button
     //if you're not, and you're on a restricted page, it's a redirect element to the auth page
@@ -119,39 +124,18 @@ export class MainPage extends Component {
             <div className="row row-logo justify-content-between align-items-center">
               <div className="col-lg-2 col-6 brand">
                 <Link to="/" className="title">
-                  BikeSecure
+                  Finder Bike
                 </Link>{" "}
               </div>
-              <div className="col-lg-6 d-none d-lg-block">
+              <div className="col-lg-6">
                 <nav>
-                  <ul className="navigation d-flex justify-content-between">
-                    <li className="navigation-item">
+                  <ul className="navigation d-flex ">
+                    <li className="navigation-item ">
                       <Link to="/report" className="links">
-                        Report a case
+                        Сообщения о краже
                       </Link>
                     </li>
-                    <li
-                      className={
-                        !state.authorized
-                          ? "hide navigation-item"
-                          : "navigation-item"
-                      }
-                    >
-                      <Link to="/cases" className="links">
-                        Cases
-                      </Link>
-                    </li>
-                    <li
-                      className={
-                        !state.authorized
-                          ? "hide navigation-item"
-                          : "navigation-item"
-                      }
-                    >
-                      <Link to="/collaborators" className="links">
-                        Collaborators
-                      </Link>
-                    </li>
+                    {cases}
                   </ul>
                 </nav>
               </div>

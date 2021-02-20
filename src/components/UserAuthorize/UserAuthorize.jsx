@@ -7,7 +7,6 @@ export class UserAuthorize extends Component {
   state = {
     email: "",
     password: "",
-    token: "",
     redirect: false,
   };
 
@@ -39,7 +38,9 @@ export class UserAuthorize extends Component {
         "Content-type": "application/json",
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        console.log("response: ", response.json());
+      })
       .then((data) => {
         console.log(data);
         console.log(localStorage.getItem("token"));
@@ -130,7 +131,7 @@ export class UserAuthorize extends Component {
             disabled={!state.email.length || !state.password.length}
           />
           <span>
-            Или <Link to="/createUser">зарегестрироваться</Link>
+            Или <Link to="/create">зарегестрироваться</Link>
           </span>
         </div>
       );
